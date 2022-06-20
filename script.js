@@ -8,15 +8,15 @@ const gameboard = (() => {
 
     function renderGameboard() {
         const board = document.querySelector('.gameboard');
-        for (let i=0; i<gameboardArray.length; i++){
-            let currentMarker = gameboardArray[i];
-            _createDiv();
-        }
-    }
+        
+        for (let i=0; i<_gameboardArray.length; i++){
+            let currentMarker = _gameboardArray[i];
+            let newSquare = document.createElement('div');
+            newSquare.classList.add('square');
+            newSquare.textContent = currentMarker;
+            board.appendChild(newSquare);
 
-    function _createDiv() {
-        let newDiv = document.createElement('div');
-        newDiv.classList.add('square');
+        }
     }
 
     return {renderGameboard};
