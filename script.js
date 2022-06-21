@@ -1,10 +1,11 @@
 const board = document.querySelector('.gameboard');
+let squares = document.querySelectorAll('.square');
 
 const gameboard = (() => {
-    const _gameboardArray = [
-        'X','O','X',
-        'O','O','X',
-        'X','X','O'
+    let _gameboardArray = [
+        '','','',
+        '','','',
+        '','',''
     ];
 
     function renderGameboard() {
@@ -17,11 +18,16 @@ const gameboard = (() => {
         }
     };
 
-    function updateBoard() {
+    function showGameboardArray () {
+        console.log(_gameboardArray);
+    }
 
+    function updateBoard(index, marker) {
+        _gameboardArray[index] = marker;
+        console.log(_gameboardArray);
     };
 
-    return {renderGameboard, updateBoard};
+    return {renderGameboard, updateBoard, showGameboardArray};
 })();
 
 const Player = (name, marker) => {
@@ -36,20 +42,44 @@ const currentPlayer = (() => {
     let players = [player1, player2];
     let currentPlayer = player1;
 
-    function _switchPlayer() {
+    function switchPlayer() {
         if (currentPlayer == player1) {
             currentPlayer = player2;
         }
         else if (currentPlayer == player2) {
             currentPlayer = player1;
         }
+    };
+
+    // board.addEventListener('click', (e) => {
+    //     e.target.textContent = currentPlayer.marker;
+    //     console.log(e.target);
+    //     switchPlayer();
+    // });
+
+    function squaresWork() {
+        // for (let i=0; i<squares.length; i++){
+        //     squares[i].index = i;
+        //     squares[i].addEventListener('click', function(e) {
+                // e.target.textContent = currentPlayer.marker;
+                // gameboard.updateBoard(i, currentPlayer.marker);
+                // switchPlayer();
+        //     });
+        // }
+
+        squares.forEach((square, currentIndex) => {
+            square.addEventListener('click', (e) => {
+                e.target.textContent = currentPlayer.marker;
+                gameboard.updateBoard(currentIndex, currentPlayer.marker);
+                switchPlayer();
+            });
+        }); 
     }
 
-    board.addEventListener('click', (e) => {
-        e.target.textContent = currentPlayer.marker;
-        _switchPlayer();
-    });
+    return {currentPlayer, switchPlayer, squaresWork}
+
 })();
 
-//Event listeners
+//Initialize on load
 window.onload = gameboard.renderGameboard();
+squares = document.querySelectorAll('.square');
