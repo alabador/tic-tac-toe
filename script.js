@@ -8,7 +8,6 @@ const gameboard = (() => {
     ];
 
     function renderGameboard() {
-        // const board = document.querySelector('.gameboard');
         for (let i=0; i<_gameboardArray.length; i++){
             let currentMarker = _gameboardArray[i];
             let newSquare = document.createElement('div');
@@ -25,25 +24,32 @@ const gameboard = (() => {
     return {renderGameboard, updateBoard};
 })();
 
-const currentPlayer = ((player) => {
-
-})();
-
 const Player = (name, marker) => {
-    const getName = () => name;
-    const getMarker = () => marker;
-    
-    function allowClick() {
-        board.addEventListener('click', (e) => {
-            console.log(e.target);
-        });
-    };
 
-    return {getName, getMarker, allowClick};
+    return {name, marker};
 }
 
 const player1 = Player('player1', 'X');
-// const player2 = Player('player2', 'O');
+const player2 = Player('player2', 'O');
+
+const currentPlayer = (() => {
+    let players = [player1, player2];
+    let currentPlayer = player1;
+
+    function _switchPlayer() {
+        if (currentPlayer == player1) {
+            currentPlayer = player2;
+        }
+        else if (currentPlayer == player2) {
+            currentPlayer = player1;
+        }
+    }
+
+    board.addEventListener('click', (e) => {
+        e.target.textContent = currentPlayer.marker;
+        _switchPlayer();
+    });
+})();
 
 //Event listeners
 window.onload = gameboard.renderGameboard();
