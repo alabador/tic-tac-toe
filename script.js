@@ -51,22 +51,7 @@ const currentPlayer = (() => {
         }
     };
 
-    // board.addEventListener('click', (e) => {
-    //     e.target.textContent = currentPlayer.marker;
-    //     console.log(e.target);
-    //     switchPlayer();
-    // });
-
-    function squaresWork() {
-        // for (let i=0; i<squares.length; i++){
-        //     squares[i].index = i;
-        //     squares[i].addEventListener('click', function(e) {
-                // e.target.textContent = currentPlayer.marker;
-                // gameboard.updateBoard(i, currentPlayer.marker);
-                // switchPlayer();
-        //     });
-        // }
-
+    function enableMarking() {
         squares.forEach((square, currentIndex) => {
             square.addEventListener('click', (e) => {
                 e.target.textContent = currentPlayer.marker;
@@ -76,7 +61,7 @@ const currentPlayer = (() => {
         }); 
     }
 
-    return {currentPlayer, switchPlayer, squaresWork}
+    return {currentPlayer, switchPlayer, enableMarking}
 
 })();
 
