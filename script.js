@@ -7,7 +7,35 @@ const gameboard = (() => {
         '','','',
         '','',''
     ];
-
+    function _checkWin() {
+        const xWins = 3;
+        const oWins = -3;
+        //Check rows for win condition
+        for(let i=0; i<_gameboardArray.length; i+=3){
+            const winRow = _gameboardArray.slice(i,i+3);
+            const winRowValue = winRow.reduce((previousValue, currentValue) => 
+                previousValue + currentValue, 0);
+            console.log(winRowValue);
+        }
+    };
+    function _assignMarkerValue() {
+        // put this in checkwin()
+        //check value of index (either x, o, or '')
+        //loop through array and assign each index a numerical value
+        //once you do this, use these values in check win --> add up to check win 
+        for (let i=0; i<_gameboardArray.length; i++){
+            if (_gameboardArray[i] == 'X' || _gameboardArray[i] == 1){
+                _gameboardArray[i]= 1;
+            }
+            else if (_gameboardArray[i] == 'O' || _gameboardArray[i] == -1){
+                _gameboardArray[i] = -1;
+            }
+            else {
+                _gameboardArray[i] = 0;
+            }
+        }
+        _checkWin();
+    }
     function renderGameboard() {
         for (let i=0; i<_gameboardArray.length; i++){
             let currentMarker = _gameboardArray[i];
@@ -17,16 +45,16 @@ const gameboard = (() => {
             board.appendChild(newSquare);
         }
     };
-
+    //For troubleshooting purposes
     function showGameboardArray () {
         console.log(_gameboardArray);
+        return _gameboardArray;
     }
-
     function updateBoard(index, marker) {
         _gameboardArray[index] = marker;
+        _assignMarkerValue();
         console.log(_gameboardArray);
     };
-
     return {renderGameboard, updateBoard, showGameboardArray};
 })();
 
@@ -39,9 +67,7 @@ const player1 = Player('player1', 'X');
 const player2 = Player('player2', 'O');
 
 const currentPlayer = (() => {
-    let players = [player1, player2];
     let currentPlayer = player1;
-
     function switchPlayer() {
         if (currentPlayer == player1) {
             currentPlayer = player2;
@@ -50,7 +76,6 @@ const currentPlayer = (() => {
             currentPlayer = player1;
         }
     };
-
     function enableMarking() {
         squares.forEach((square, currentIndex) => {
             square.addEventListener('click', (e) => {
@@ -60,9 +85,7 @@ const currentPlayer = (() => {
             });
         }); 
     }
-
-    return {currentPlayer, switchPlayer, enableMarking}
-
+    return {switchPlayer, enableMarking}
 })();
 
 //Initialize on load
