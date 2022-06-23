@@ -1,6 +1,8 @@
 const board = document.querySelector('.gameboard');
 let squares = document.querySelectorAll('.square');
 
+//player clicks on board, calls updateBoard(), each marker is assigned a value, 
+//then win conditions are checked.
 const gameboard = (() => {
     let _gameboardArray = [
         '','','',
@@ -22,7 +24,7 @@ const gameboard = (() => {
             let winCol = [_gameboardArray[i],_gameboardArray[i+3],_gameboardArray[i+6]];
             const winColValue = winCol.reduce((previousValue, currentValue) => 
                 previousValue + currentValue, 0);
-            console.log(winColValue);
+            // console.log(winColValue);
             _checkValue(winColValue);
         };
         //Check diagonals for win condition
@@ -36,7 +38,7 @@ const gameboard = (() => {
             }
             const winDiagValue = winDiag.reduce((previousValue, currentValue) => 
                 previousValue + currentValue, 0);
-            console.log(winDiagValue);
+            // console.log(winDiagValue);
             _checkValue(winDiagValue);
         };
     };
@@ -56,9 +58,14 @@ const gameboard = (() => {
             console.log('Game is tied');
         }
     }
-    //if a player is marked as winner, then stops game.
+    //if a player is marked as winner,declares winner then stops game.
     function _checkWinningPlayer() {
-        
+        if (player1.winner == true){
+            console.log('player1 wins')
+        }
+        else if (player2.winner == true){
+            console.log('player2 wins');
+        }
     }
     function _assignMarkerValue() {
         for (let i=0; i<_gameboardArray.length; i++){
@@ -119,9 +126,14 @@ const currentPlayer = (() => {
     function enableMarking() {
         squares.forEach((square, currentIndex) => {
             square.addEventListener('click', (e) => {
-                e.target.textContent = currentPlayer.marker;
-                gameboard.updateBoard(currentIndex, currentPlayer.marker);
-                switchPlayer();
+                if (e.target.textContent == player1.marker || e.target.textContent == player2.marker) {
+                    return;
+                }
+                else {
+                    e.target.textContent = currentPlayer.marker;
+                    gameboard.updateBoard(currentIndex, currentPlayer.marker);
+                    switchPlayer();
+                }
             });
         }); 
     }
