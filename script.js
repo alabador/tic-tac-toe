@@ -17,6 +17,12 @@ const gameboard = (() => {
                 previousValue + currentValue, 0);
             console.log(winRowValue);
         }
+        for(let i=0; i<3; i++){
+            let winCol = [_gameboardArray[i],_gameboardArray[i+3],_gameboardArray[i+6]];
+            const winColValue = winCol.reduce((previousValue, currentValue) => 
+                previousValue + currentValue, 0);
+            console.log(winColValue);
+        };
     };
     function _assignMarkerValue() {
         // put this in checkwin()
