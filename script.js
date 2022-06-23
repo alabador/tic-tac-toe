@@ -15,14 +15,15 @@ const gameboard = (() => {
             const winRow = _gameboardArray.slice(i,i+3);
             const winRowValue = winRow.reduce((previousValue, currentValue) => 
                 previousValue + currentValue, 0);
-            // console.log(winRowValue);
+            _checkValue(winRowValue);
         }
         //Check columns for win condition
         for(let i=0; i<3; i++){
             let winCol = [_gameboardArray[i],_gameboardArray[i+3],_gameboardArray[i+6]];
             const winColValue = winCol.reduce((previousValue, currentValue) => 
                 previousValue + currentValue, 0);
-            // console.log(winColValue);
+            console.log(winColValue);
+            _checkValue(winColValue);
         };
         //Check diagonals for win condition
         for(let i=0; i<3; i+=2){
@@ -36,13 +37,30 @@ const gameboard = (() => {
             const winDiagValue = winDiag.reduce((previousValue, currentValue) => 
                 previousValue + currentValue, 0);
             console.log(winDiagValue);
+            _checkValue(winDiagValue);
         };
     };
+    function _checkValue(value) {
+        if (value == 3){
+            return player1.winner = true;
+        }
+        else if (value == -3){
+            return player2.winner = true;
+        }
+        else {
+            return;
+        }
+    }
+    function _checkTie() {
+        if (!_gameboardArray.includes(0)){
+            console.log('Game is tied');
+        }
+    }
+    //if a player is marked as winner, then stops game.
+    function _checkWinningPlayer() {
+        
+    }
     function _assignMarkerValue() {
-        // put this in checkwin()
-        //check value of index (either x, o, or '')
-        //loop through array and assign each index a numerical value
-        //once you do this, use these values in check win --> add up to check win 
         for (let i=0; i<_gameboardArray.length; i++){
             if (_gameboardArray[i] == 'X' || _gameboardArray[i] == 1){
                 _gameboardArray[i]= 1;
@@ -55,6 +73,8 @@ const gameboard = (() => {
             }
         }
         _checkWin();
+        _checkTie();
+        _checkWinningPlayer();
     }
     function renderGameboard() {
         for (let i=0; i<_gameboardArray.length; i++){
@@ -79,8 +99,8 @@ const gameboard = (() => {
 })();
 
 const Player = (name, marker) => {
-
-    return {name, marker};
+    let winner = false;
+    return {name, marker, winner};
 }
 
 const player1 = Player('player1', 'X');
