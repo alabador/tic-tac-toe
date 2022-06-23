@@ -15,13 +15,27 @@ const gameboard = (() => {
             const winRow = _gameboardArray.slice(i,i+3);
             const winRowValue = winRow.reduce((previousValue, currentValue) => 
                 previousValue + currentValue, 0);
-            console.log(winRowValue);
+            // console.log(winRowValue);
         }
+        //Check columns for win condition
         for(let i=0; i<3; i++){
             let winCol = [_gameboardArray[i],_gameboardArray[i+3],_gameboardArray[i+6]];
             const winColValue = winCol.reduce((previousValue, currentValue) => 
                 previousValue + currentValue, 0);
-            console.log(winColValue);
+            // console.log(winColValue);
+        };
+        //Check diagonals for win condition
+        for(let i=0; i<3; i+=2){
+            let winDiag = [];
+            if (i==0){
+                winDiag = [_gameboardArray[i],_gameboardArray[i+4],_gameboardArray[i+8]];
+            }
+            else if (i==2){
+                winDiag = [_gameboardArray[i],_gameboardArray[i+2],_gameboardArray[i+4]];
+            }
+            const winDiagValue = winDiag.reduce((previousValue, currentValue) => 
+                previousValue + currentValue, 0);
+            console.log(winDiagValue);
         };
     };
     function _assignMarkerValue() {
