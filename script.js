@@ -25,7 +25,6 @@ const gameboard = (() => {
             let winCol = [_gameboardArray[i],_gameboardArray[i+3],_gameboardArray[i+6]];
             const winColValue = winCol.reduce((previousValue, currentValue) => 
                 previousValue + currentValue, 0);
-            // console.log(winColValue);
             _checkValue(winColValue);
         };
         //Check diagonals for win condition
@@ -39,7 +38,6 @@ const gameboard = (() => {
             }
             const winDiagValue = winDiag.reduce((previousValue, currentValue) => 
                 previousValue + currentValue, 0);
-            // console.log(winDiagValue);
             _checkValue(winDiagValue);
         };
     };
@@ -111,7 +109,6 @@ const gameboard = (() => {
     function updateBoard(index, marker) {
         _gameboardArray[index] = marker;
         _assignMarkerValue();
-        console.log(_gameboardArray);
     };
     function resetGameboard () {
         _gameboardArray = [
