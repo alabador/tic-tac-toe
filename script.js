@@ -1,6 +1,7 @@
 const board = document.querySelector('.gameboard');
 let squares = document.querySelectorAll('.square');
 
+
 //player clicks on board, calls updateBoard(), each marker is assigned a value, 
 //then win conditions are checked.
 const gameboard = (() => {
@@ -143,6 +144,19 @@ const currentPlayer = (() => {
     }
     return {switchPlayer, enableMarking}
 })();
+
+const startButton = {
+    start: document.querySelector('.start'),
+    menu: document.querySelector('.menu'),
+    newGame: function() {
+        console.log(this);
+        startButton.menu.classList.toggle('invisible');
+        currentPlayer.enableMarking();
+    }
+};
+
+
+startButton.start.addEventListener('click', startButton.newGame)
 
 //Initialize on load
 window.onload = gameboard.renderGameboard();
