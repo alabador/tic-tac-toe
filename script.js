@@ -170,10 +170,16 @@ const currentPlayer = (() => {
 const startMenu = {
     start: document.querySelector('.start'),
     menu: document.querySelector('.menu'),
+    player1Name: document.querySelector('#player1'),
+    player2Name: document.querySelector('#player2'),
     newGame: function() {
         startMenu.menu.classList.toggle('invisible');
         currentPlayer.enableMarking();
-    }
+    },
+    // submitNames: function() {
+    //     player1.name = startMenu.player1Name.value;
+    //     player2.name = startMenu.player2Name.value;
+    // }
 };
 
 const controlPanel = {
@@ -208,6 +214,7 @@ const announcement = {
         announcement.gameStatus.classList.toggle('invisible');
     }
 }
+
 
 startMenu.start.addEventListener('click', startMenu.newGame);
 controlPanel.end.addEventListener('click', controlPanel.endGame);
