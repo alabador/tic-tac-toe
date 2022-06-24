@@ -55,7 +55,8 @@ const gameboard = (() => {
     }
     function _checkTie() {
         if (!_gameboardArray.includes(0)){
-            console.log('Game is tied');
+            player1.winner = "tied";
+            player2.winner = "tied";
         }
     }
     //if a player is marked as winner,declares winner then stops game.
@@ -127,6 +128,9 @@ const currentPlayer = (() => {
         squares.forEach((square, currentIndex) => {
             square.addEventListener('click', (e) => {
                 if (e.target.textContent == player1.marker || e.target.textContent == player2.marker) {
+                    return;
+                }
+                else if (player1.winner == true || player2.winner == true || player1.winner == "tied") {
                     return;
                 }
                 else {
