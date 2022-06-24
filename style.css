@@ -22,28 +22,27 @@
     gap: 4rem;
     align-items: center;
     font-family: 'Bungee Shade', cursive;
-    background-color: rgb(255, 255, 255);
     font-size: 2rem;
     background-color: rgb(250, 235, 217);
 }
 
 .menu h1 {
     margin: 0;
-    color: rgb(96, 171, 221);
+    color: rgb(68, 128, 168);
 }
 
 .menu .start {
     font-family: 'Bungee Inline', cursive;
     padding: 1.2rem;
     border: none;
-    border: 2px solid rgb(96, 171, 221);
+    border: 3px solid rgb(68, 128, 168);
     background: none;
-    color: rgb(96, 171, 221);
+    color: rgb(68, 128, 168);
     font-weight: 500;
 }
 
 .menu .start:hover {
-    background-color: rgb(96, 171, 221);
+    background-color: rgb(68, 128, 168);
     color: white;
 }
 
@@ -82,7 +81,7 @@
 }
 
 .gameboard div {
-    outline: 3px solid rgb(96, 171, 221);
+    outline: 3px solid rgb(68, 128, 168);
 }
 
 .announcement {
@@ -92,6 +91,7 @@
 
 .announcement h1 {
     margin: 0;
+    color: rgb(68, 128, 168);
 }
 
 .game-controls {
@@ -103,14 +103,14 @@
     font-family: 'Bungee Inline', cursive;
     padding: 1.2rem;
     border: none;
-    border: 2px solid rgb(96, 171, 221);
+    border: 3px solid rgb(68, 128, 168);
     background: none;
-    color: rgb(96, 171, 221);
+    color: rgb(68, 128, 168);
     font-weight: 500;
 }
 
 .game-controls button:hover {
-    background-color: rgb(96, 171, 221);
+    background-color: rgb(68, 128, 168);
     color: white;
 }
 
