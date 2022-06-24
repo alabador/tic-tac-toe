@@ -8,6 +8,7 @@
     align-items: center;
     flex-direction: column;
     gap: 32px;
+    background-color: rgb(250, 235, 217);
 }
 
 .menu {
@@ -17,11 +18,13 @@
     z-index: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
+    gap: 4rem;
     align-items: center;
     font-family: 'Bungee Shade', cursive;
     background-color: rgb(255, 255, 255);
     font-size: 2rem;
+    background-color: rgb(250, 235, 217);
 }
 
 .menu h1 {
@@ -54,6 +57,7 @@
 
 .player-container input {
     width: 100%;
+    font-size: 1.3rem;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -62,12 +66,17 @@
 }
 
 .gameboard {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     width: 500px;
     height: 500px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
+    overflow: hidden;
+}
+
+.gameboard div {
+    outline: 3px solid rgb(96, 171, 221);
 }
 
 .announcement {
@@ -95,10 +104,10 @@
 }
 
 .square {
-    border: 1px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 3rem;
     font-family: sans-serif;
+    font-weight: 700;
 }
