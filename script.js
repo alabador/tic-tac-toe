@@ -185,6 +185,19 @@ const controlPanel = {
     },
     endGame: function() {
         startMenu.menu.classList.toggle('invisible');
+        controlPanel.restartGame();
+    },
+    restartGame: function() {
+        gameboard.resetGameboard();
+        gameboard.renderGameboard();
+        squares = document.querySelectorAll('.square');
+        currentPlayer.enableMarking();
+        currentPlayer.resetStartingPlayer();
+        player1.winner = false;
+        player2.winner = false;
+        announcement.winner.textContent = '';
+        announcement.showAnnouncement();
+        controlPanel.showControls();
     }
 }
 
@@ -196,26 +209,9 @@ const announcement = {
     }
 }
 
-function endGame() {
-    startMenu.menu.classList.toggle('invisible');
-}
-
-function restartGame() {
-    gameboard.resetGameboard();
-    gameboard.renderGameboard();
-    squares = document.querySelectorAll('.square');
-    currentPlayer.enableMarking();
-    currentPlayer.resetStartingPlayer();
-    player1.winner = false;
-    player2.winner = false;
-    announcement.winner.textContent = '';
-    announcement.showAnnouncement();
-    controlPanel.showControls();
-}
-
 startMenu.start.addEventListener('click', startMenu.newGame);
-controlPanel.end.addEventListener('click', endGame);
-controlPanel.restart.addEventListener('click', restartGame);
+controlPanel.end.addEventListener('click', controlPanel.endGame);
+controlPanel.restart.addEventListener('click', controlPanel.restartGame);
 
 //Initialize on load
 window.onload = gameboard.renderGameboard();
