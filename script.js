@@ -14,14 +14,14 @@ const gameboard = (() => {
         const xWins = 3;
         const oWins = -3;
         //Check rows for win condition
-        for(let i=0; i<_gameboardArray.length; i+=3){
-            const winRow = _gameboardArray.slice(i,i+3);
+        for(let i = 0; i < _gameboardArray.length; i += 3){
+            const winRow = _gameboardArray.slice(i, i+3);
             const winRowValue = winRow.reduce((previousValue, currentValue) => 
                 previousValue + currentValue, 0);
             _checkValue(winRowValue);
         }
         //Check columns for win condition
-        for(let i=0; i<3; i++){
+        for(let i = 0; i < 3; i++){
             let winCol = [_gameboardArray[i],_gameboardArray[i+3],_gameboardArray[i+6]];
             const winColValue = winCol.reduce((previousValue, currentValue) => 
                 previousValue + currentValue, 0);
@@ -29,7 +29,7 @@ const gameboard = (() => {
             _checkValue(winColValue);
         };
         //Check diagonals for win condition
-        for(let i=0; i<3; i+=2){
+        for(let i = 0; i < 3; i += 2){
             let winDiag = [];
             if (i==0){
                 winDiag = [_gameboardArray[i],_gameboardArray[i+4],_gameboardArray[i+8]];
@@ -89,7 +89,9 @@ const gameboard = (() => {
             }
         }
         _checkWin();
-        _checkTie();
+        if (player1.winner == false && player2.winner == false && !_gameboardArray.includes(0)){
+            _checkTie();  
+        }
         _checkWinningPlayer();
     }
     function renderGameboard() {
@@ -158,8 +160,11 @@ const currentPlayer = (() => {
                 }
             });
         }); 
+    };
+    function resetStartingPlayer() {
+        currentPlayer = player1;
     }
-    return {switchPlayer, enableMarking}
+    return {switchPlayer, enableMarking, resetStartingPlayer}
 })();
 
 const startMenu = {
@@ -179,8 +184,6 @@ const controlPanel = {
         controlPanel.controls.classList.toggle('invisible');
     },
     endGame: function() {
-        gameboard.resetGameboard();
-        gameboard.renderGameboard();
         startMenu.menu.classList.toggle('invisible');
     }
 }
@@ -194,17 +197,25 @@ const announcement = {
 }
 
 function endGame() {
-    gameboard.resetGameboard();
-    gameboard.renderGameboard();
     startMenu.menu.classList.toggle('invisible');
 }
 
 function restartGame() {
-    
+    gameboard.resetGameboard();
+    gameboard.renderGameboard();
+    squares = document.querySelectorAll('.square');
+    currentPlayer.enableMarking();
+    currentPlayer.resetStartingPlayer();
+    player1.winner = false;
+    player2.winner = false;
+    announcement.winner.textContent = '';
+    announcement.showAnnouncement();
+    controlPanel.showControls();
 }
 
 startMenu.start.addEventListener('click', startMenu.newGame);
-controlPanel.end.addEventListener('click', controlPanel.endGame);
+controlPanel.end.addEventListener('click', endGame);
+controlPanel.restart.addEventListener('click', restartGame);
 
 //Initialize on load
 window.onload = gameboard.renderGameboard();
