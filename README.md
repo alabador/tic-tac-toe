@@ -2,7 +2,8 @@
 Tic Tac Toe game created using HTML, CSS, and JS. 
 
 [Live Demo](https://alabador.github.io/tic-tac-toe/)
-![Game Screen]("tic-tac-toe.png")
+
+![Game Screen](/tic-tac-toe.png)
 
 ## Built With
 - HTML5, CSS3, and JavaScript
