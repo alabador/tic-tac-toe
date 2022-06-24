@@ -58,15 +58,22 @@ const gameboard = (() => {
         if (!_gameboardArray.includes(0)){
             player1.winner = "tied";
             player2.winner = "tied";
+            announcement.winner.textContent = "It's a tie!";
+            announcement.showAnnouncement();
+            controlPanel.showControls();
         }
     }
     //if a player is marked as winner,declares winner then stops game.
     function _checkWinningPlayer() {
         if (player1.winner == true){
-            console.log('player1 wins')
+            announcement.winner.textContent = 'Player 1 Wins!';
+            announcement.showAnnouncement();
+            controlPanel.showControls();
         }
         else if (player2.winner == true){
-            console.log('player2 wins');
+            announcement.winner.textContent = 'Player 2 Wins!';
+            announcement.showAnnouncement();
+            controlPanel.showControls();
         }
     }
     function _assignMarkerValue() {
@@ -104,7 +111,17 @@ const gameboard = (() => {
         _assignMarkerValue();
         console.log(_gameboardArray);
     };
-    return {renderGameboard, updateBoard, showGameboardArray};
+    function resetGameboard () {
+        _gameboardArray = [
+            '','','',
+            '','','',
+            '','',''
+        ];
+        while (board.firstChild) {
+            board.removeChild(board.lastChild);
+        }
+    }
+    return {renderGameboard, updateBoard, showGameboardArray, resetGameboard};
 })();
 
 const Player = (name, marker) => {
@@ -145,18 +162,49 @@ const currentPlayer = (() => {
     return {switchPlayer, enableMarking}
 })();
 
-const startButton = {
+const startMenu = {
     start: document.querySelector('.start'),
     menu: document.querySelector('.menu'),
     newGame: function() {
-        console.log(this);
-        startButton.menu.classList.toggle('invisible');
+        startMenu.menu.classList.toggle('invisible');
         currentPlayer.enableMarking();
     }
 };
 
+const controlPanel = {
+    controls: document.querySelector('.game-controls'),
+    end: document.querySelector('.end'),
+    restart: document.querySelector('.restart'),
+    showControls: function() {
+        controlPanel.controls.classList.toggle('invisible');
+    },
+    endGame: function() {
+        gameboard.resetGameboard();
+        gameboard.renderGameboard();
+        startMenu.menu.classList.toggle('invisible');
+    }
+}
 
-startButton.start.addEventListener('click', startButton.newGame)
+const announcement = {
+    gameStatus: document.querySelector('.announcement'),
+    winner: document.querySelector('.winner'),
+    showAnnouncement: function() {
+        announcement.gameStatus.classList.toggle('invisible');
+    }
+}
+
+function endGame() {
+    gameboard.resetGameboard();
+    gameboard.renderGameboard();
+    startMenu.menu.classList.toggle('invisible');
+}
+
+function restartGame() {
+    
+}
+
+startMenu.start.addEventListener('click', startMenu.newGame);
+controlPanel.end.addEventListener('click', controlPanel.endGame);
 
 //Initialize on load
 window.onload = gameboard.renderGameboard();
