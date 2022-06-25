@@ -64,12 +64,12 @@ const gameboard = (() => {
     //if a player is marked as winner,declares winner then stops game.
     function _checkWinningPlayer() {
         if (player1.winner == true){
-            announcement.winner.textContent = 'Player 1 Wins!';
+            announcement.winner.textContent = `${player1.name} wins!`;
             announcement.showAnnouncement();
             controlPanel.showControls();
         }
         else if (player2.winner == true){
-            announcement.winner.textContent = 'Player 2 Wins!';
+            announcement.winner.textContent = `${player2.name} wins!`;
             announcement.showAnnouncement();
             controlPanel.showControls();
         }
@@ -173,10 +173,19 @@ const startMenu = {
         startMenu.menu.classList.toggle('invisible');
         currentPlayer.enableMarking();
     },
-    // submitNames: function() {
-    //     player1.name = startMenu.player1Name.value;
-    //     player2.name = startMenu.player2Name.value;
-    // }
+    submitNames: function() {
+        player1.name = startMenu.player1Name.value;
+        player2.name = startMenu.player2Name.value;
+    },
+    showStart: function() {
+        let player1 = startMenu.player1Name.value;
+        let player2 = startMenu.player2Name.value;
+        console.log(player1);
+        console.log(player2);
+        if (player1.length > 0 && player2.length > 0){
+            startMenu.start.classList.remove('invisible');
+        }
+    },
 };
 
 const controlPanel = {
@@ -214,6 +223,9 @@ const announcement = {
 
 
 startMenu.start.addEventListener('click', startMenu.newGame);
+startMenu.start.addEventListener('click', startMenu.submitNames);
+startMenu.player1Name.addEventListener('change', startMenu.showStart);
+startMenu.player2Name.addEventListener('change', startMenu.showStart);
 controlPanel.end.addEventListener('click', controlPanel.endGame);
 controlPanel.restart.addEventListener('click', controlPanel.restartGame);
 

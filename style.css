@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Bungee+Inline&family=Bungee+Shade&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 
+:root {
+    --main-blue: rgb(68, 128, 168);
+}
+
 .wrapper {
     width: 100vw;
     height: 100vh;
@@ -8,7 +12,7 @@
     align-items: center;
     flex-direction: column;
     gap: 32px;
-    background-color: rgb(250, 235, 217);
+    background-color: rgb(255, 245, 233);
 }
 
 .menu {
@@ -23,26 +27,26 @@
     align-items: center;
     font-family: 'Bungee Shade', cursive;
     font-size: 2rem;
-    background-color: rgb(250, 235, 217);
+    background-color: rgb(255, 245, 233);
 }
 
 .menu h1 {
     margin: 0;
-    color: rgb(68, 128, 168);
+    color: var(--main-blue);
 }
 
 .menu .start {
     font-family: 'Bungee Inline', cursive;
     padding: 1.2rem;
     border: none;
-    border: 3px solid rgb(68, 128, 168);
+    border: 3px solid var(--main-blue);
     background: none;
-    color: rgb(68, 128, 168);
+    color: var(--main-blue);
     font-weight: 500;
 }
 
 .menu .start:hover {
-    background-color: rgb(68, 128, 168);
+    background-color: var(--main-blue);
     color: white;
 }
 
@@ -60,10 +64,16 @@
     flex-direction: column;
 }
 
+.player-container label {
+    font-size: 1.8rem;
+}
+
 .player-container input {
     width: 100%;
     font-size: 1.3rem;
     font-family: 'Roboto', sans-serif;
+    background: none;
+    border: 2px solid var(--main-blue);
 }
 
 .invisible {
@@ -81,7 +91,7 @@
 }
 
 .gameboard div {
-    outline: 3px solid rgb(68, 128, 168);
+    outline: 3px solid var(--main-blue);
 }
 
 .announcement {
@@ -91,7 +101,7 @@
 
 .announcement h1 {
     margin: 0;
-    color: rgb(68, 128, 168);
+    color: var(--main-blue);
 }
 
 .game-controls {
@@ -103,14 +113,14 @@
     font-family: 'Bungee Inline', cursive;
     padding: 1.2rem;
     border: none;
-    border: 3px solid rgb(68, 128, 168);
+    border: 3px solid var(--main-blue);
     background: none;
-    color: rgb(68, 128, 168);
+    color: var(--main-blue);
     font-weight: 500;
 }
 
 .game-controls button:hover {
-    background-color: rgb(68, 128, 168);
+    background-color: var(--main-blue);
     color: white;
 }
 
@@ -121,4 +131,5 @@
     font-size: 3rem;
     font-family: sans-serif;
     font-weight: 700;
+    color: var(--main-blue);
 }
